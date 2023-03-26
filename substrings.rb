@@ -3,13 +3,19 @@ puts "Enter a word"
 string = gets.chomp.downcase
 
 def substrings(string, dictionary)
-    p contain = dictionary.include?(string)
-    p number = dictionary.count(string)
-    if contain == true
-        hash = {string => number}
-        p hash
+    counts = {}
+    dictionary.each do |word|
+      ptr = 0
+      while ptr < string.length
+        index = string.index(word, ptr)
+        break if index.nil?
+        counts[word] ||= 0
+        counts[word] += 1
+        ptr = index + word.length
+      end
     end
-end
+    p counts
+  end
 
 
 substrings(string, dictionary)
