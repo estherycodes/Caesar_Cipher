@@ -7,58 +7,33 @@ def stock_picker(array)
     i = 0
     j = 1
     best = 0
-        until i >= array.length
-            buy = array[i]
-            p "buy: " + buy.to_s
-
+    until i >= array.length
+        buy = array[i]
+        p "buy: " + buy.to_s
+        j = i + 1
+        
         until j >= array.length
-            sell = array[i + j]
+            sell = array[j]
             p "sell: " + sell.to_s
-
+            
             gain = sell - buy
             p "gain: " + gain.to_s
-
+            
             if gain > best
                 best = gain 
+                best_buy = i
+                best_sell = j
             end
-    
-            break if gain < 1
-            i += 1
-        end
-                p "best: " + best.to_s
-
-        p "j at end: " + (j += 1).to_s
-    end
-    p "i at end: " + (i).to_s
-    end
-end
-
-=begin
-def stock_picker(array)
-    loop do
-        i = 0
-        p buy = array[i]
-        p sell = array[i + 1]
-        p gain = sell - buy
-        
-        if gain < 1 
-            i += 1
-            next
+            
+            break if j == array.length - 1
+            j += 1
         end
         
-        p sell = array[i + 2]
-        
-        loop do
-        if sell - buy > gain
-            p gain = sell - buy
-            sell = array[i + 3]
-        end
-
-        if sell - buy < gain
-            gain = best
-        end
+        break if i == array.length - 1
         i += 1
     end
-=end
 
+    p [best_buy, best_sell]
+end
+     
 stock_picker(stock_prices)
